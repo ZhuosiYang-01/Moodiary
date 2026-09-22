@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="心屿是一款轻量的情绪日记与自我关怀工具。">
+  <title>心屿 · 情绪日记与自我关怀</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23877db5'/%3E%3Cpath d='M14 35c10-17 26-17 36 0-10 17-26 17-36 0Z' fill='%23f8f5ef'/%3E%3Ccircle cx='32' cy='35' r='7' fill='%239caf9a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="心屿首页"><span class="brand-mark">心</span><span>心屿</span></a>
+    <nav><a href="#record">记录</a><a href="#tarot">觉察卡</a><a href="#history">回顾</a></nav>
+    <button id="openAi" class="ghost-btn">和 AI 聊聊 <span>↗</span></button>
+  </header>
+
+  <main id="top">
+    <section class="intro">
+      <p class="eyebrow" id="today"></p>
+      <h1>给情绪一个<br><em>轻轻停靠</em>的地方</h1>
+      <p>不必急着解释或解决。先看见它，再选择一个对自己温柔的小行动。</p>
+      <div class="streak"><strong id="entryCount">0</strong><span>次被认真看见的心情</span></div>
+    </section>
+
+    <section class="workspace" id="record">
+      <article class="card journal-card">
+        <div class="section-heading"><div><span class="step">01</span><h2>此刻，你感觉怎么样？</h2></div><span class="privacy">仅保存在此设备</span></div>
+        <form id="moodForm">
+          <fieldset class="mood-grid"><legend class="sr-only">选择情绪</legend></fieldset>
+          <div class="intensity-row"><label for="intensity">情绪强度</label><output id="intensityValue">3 · 有些明显</output></div>
+          <input id="intensity" type="range" min="1" max="5" value="3">
+          <label class="field-label" for="journal">发生了什么？</label>
+          <textarea id="journal" maxlength="1000" rows="5" placeholder="不用组织语言，想到什么就写什么……"></textarea>
+          <div class="field-meta"><span>写一点，或只记录情绪也可以</span><span id="charCount">0 / 1000</span></div>
+          <span class="field-label">可能的触发因素</span>
+          <div class="trigger-list" id="triggerList"></div>
+          <p id="formError" class="form-error" role="alert"></p>
+          <button class="primary-btn" type="submit">收藏这一刻 <span>→</span></button>
+        </form>
+      </article>
+
+      <article class="card tarot-card" id="tarot">
+        <div class="section-heading"><div><span class="step">02</span><h2>抽一张情绪觉察卡</h2></div></div>
+        <p class="muted">它不预测未来，只借牌面的象征，陪你看见此刻的内心。</p>
+        <div class="draw-stage">
+          <button id="drawCard" class="tarot-deck" aria-label="抽取一张塔罗觉察卡">
+            <span class="deck-star">✦</span><span>点击抽卡</span><small>78 张牌 · 每张都有情绪提示</small>
+          </button>
+          <div id="tarotResult" class="tarot-result" hidden>
+            <div class="tarot-visual"><span id="cardGlyph">☾</span><small id="cardArcana"></small></div>
+            <div><p class="eyebrow" id="cardOrientation"></p><h3 id="cardName"></h3><p id="cardMeaning" class="meaning"></p></div>
+            <div class="insight-block"><span>情绪照见</span><p id="cardEmotion"></p></div>
+            <div class="insight-block solution"><span>给自己的行动</span><p id="cardSolution"></p></div>
+            <blockquote id="cardQuestion"></blockquote>
+            <button id="drawAgain" class="secondary-btn">再抽一张</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="care-section" id="care">
+      <div class="section-title"><div><span class="step">03</span><h2>现在，照顾自己一点点</h2></div><p id="careIntro">选择情绪后，会为你准备三个低门槛的小行动。</p></div>
+      <div id="careGrid" class="care-grid"></div>
+    </section>
+
+    <section class="history-section" id="history">
+      <div class="section-title"><div><span class="step">04</span><h2>最近的心情</h2></div><button id="clearAll" class="text-btn">清空记录</button></div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+  </main>
+
+  <footer><p>心屿提供日常情绪记录与自我关怀建议，不进行心理诊断，也不能替代专业帮助。</p><button id="openSafety" class="text-btn">需要立即帮助？</button></footer>
+
+  <dialog id="aiDialog">
+    <button class="dialog-close" data-close aria-label="关闭">×</button>
+    <span class="dialog-icon">✦</span><h2>和 AI 关怀助手聊聊</h2>
+    <p>这是一个本地演示。它不会发送或保存你的文字，也不会进行诊断。</p>
+    <div id="aiMessages" class="ai-messages"><div class="ai-bubble">我在这里陪你理一理。你希望我先倾听，帮你梳理，还是给一个当下能做的小建议？</div></div>
+    <div class="quick-prompts"><button>先听我说</button><button>帮我梳理</button><button>给我一个小建议</button></div>
+  </dialog>
+
+  <dialog id="safetyDialog">
+    <button class="dialog-close" data-close aria-label="关闭">×</button><span class="dialog-icon safe">♡</span><h2>你不需要独自撑着</h2>
+    <p>如果你此刻有伤害自己或他人的想法，或无法保证自身安全，请立即联系身边可信任的人，并拨打当地急救电话或危机干预热线。心屿无法提供紧急救援。</p>
+    <a class="primary-btn link-btn" href="https://findahelpline.com/zh-CN" target="_blank" rel="noopener">查找当地求助资源 <span>↗</span></a>
+    <button class="secondary-btn" data-close>我目前是安全的</button>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="tarot-data.js"></script><script src="care-content.js"></script><script src="app.js"></script>
+</body>
+</html>
