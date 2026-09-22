@@ -6,7 +6,7 @@
   <meta name="description" content="心屿是一款轻量的情绪日记与自我关怀工具。">
   <title>心屿 · 情绪日记与自我关怀</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23877db5'/%3E%3Cpath d='M14 35c10-17 26-17 36 0-10 17-26 17-36 0Z' fill='%23f8f5ef'/%3E%3Ccircle cx='32' cy='35' r='7' fill='%239caf9a'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260922-2">
 </head>
 <body>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
@@ -49,7 +49,7 @@
             <span class="deck-star">✦</span><span>点击抽卡</span><small>78 张牌 · 每张都有情绪提示</small>
           </button>
           <div id="tarotResult" class="tarot-result" hidden>
-            <figure class="tarot-visual"><img id="cardImage" class="tarot-card-image" src="assets/tarot/Fool.jpg" alt="塔罗牌面"><figcaption id="cardArcana"></figcaption></figure>
+            <figure class="tarot-visual"><img id="cardImage" class="tarot-card-image" src="assets/tarot/Fool.jpg" alt="塔罗牌面" width="200" height="349"><figcaption id="cardArcana"></figcaption></figure>
             <div class="tarot-summary"><p class="eyebrow" id="cardOrientation"></p><h3 id="cardName"></h3><div id="emotionTags" class="emotion-tags" aria-label="情绪标签"></div><p id="cardMeaning" class="meaning"></p></div>
             <div class="emotion-space" aria-label="情绪三维空间">
               <div class="emotion-space-head"><strong>这张牌带来的情绪感受</strong></div>
@@ -99,6 +99,6 @@
     <button class="secondary-btn" data-close>我目前是安全的</button>
   </dialog>
   <div id="toast" class="toast" role="status"></div>
-  <script src="tarot-data.js"></script><script src="care-content.js"></script><script src="app.js"></script>
+  <script src="tarot-data.js?v=20260922-2"></script><script src="care-content.js?v=20260922-2"></script><script src="app.js?v=20260922-2"></script>
 </body>
 </html>
