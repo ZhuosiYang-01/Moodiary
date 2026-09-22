@@ -49,8 +49,19 @@
             <span class="deck-star">✦</span><span>点击抽卡</span><small>78 张牌 · 每张都有情绪提示</small>
           </button>
           <div id="tarotResult" class="tarot-result" hidden>
-            <div class="tarot-visual"><span id="cardGlyph">☾</span><small id="cardArcana"></small></div>
-            <div><p class="eyebrow" id="cardOrientation"></p><h3 id="cardName"></h3><p id="cardMeaning" class="meaning"></p></div>
+            <figure class="tarot-visual"><img id="cardImage" class="tarot-card-image" src="assets/tarot/Fool.jpg" alt="塔罗牌面"><figcaption id="cardArcana"></figcaption></figure>
+            <div class="tarot-summary"><p class="eyebrow" id="cardOrientation"></p><h3 id="cardName"></h3><div id="emotionTags" class="emotion-tags" aria-label="情绪标签"></div><p id="cardMeaning" class="meaning"></p></div>
+            <div class="emotion-space" aria-label="情绪三维空间">
+              <div class="emotion-space-head"><strong>这张牌带来的情绪感受</strong></div>
+              <dl class="vad-help">
+                <div><dt>效价</dt><dd>从不舒服到愉快</dd></div>
+                <div><dt>唤醒</dt><dd>从平静到激动</dd></div>
+                <div><dt>掌控</dt><dd>从无助到有把握</dd></div>
+              </dl>
+              <div class="vad-row"><span>效价</span><div class="vad-track valence"><i id="valenceBar"></i></div><output id="valenceValue"></output></div>
+              <div class="vad-row"><span>唤醒</span><div class="vad-track"><i id="arousalBar"></i></div><output id="arousalValue"></output></div>
+              <div class="vad-row"><span>掌控</span><div class="vad-track"><i id="dominanceBar"></i></div><output id="dominanceValue"></output></div>
+            </div>
             <div class="insight-block"><span>情绪照见</span><p id="cardEmotion"></p></div>
             <div class="insight-block solution"><span>给自己的行动</span><p id="cardSolution"></p></div>
             <blockquote id="cardQuestion"></blockquote>
